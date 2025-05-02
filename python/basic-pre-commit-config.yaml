@@ -1,0 +1,41 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v3.2.0 # or whatever the latest version is
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-added-large-files
+      - id: check-json
+      - id: detect-private-key
+      - id: name-tests-test
+
+  - repo: https://github.com/astral-sh/uv-pre-commit
+    rev: 0.7.2 # or whatever the latest version is
+    hooks:
+      - id: uv-lock
+
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.11.6 # or whatever the latest version is
+    hooks:
+      - id: ruff
+      - id: ruff-format
+
+  - repo: https://github.com/DetachHead/basedpyright-pre-commit-mirror
+    rev: v1.13.0 # or whatever the latest version is
+    hooks:
+      - id: basedpyright
+    # NOTE: Make sure to add these to your pyproject.toml
+    # [tool.basedpyright]
+    # exclude = [".venv"]
+    # venvPath = "."
+    # venv = ".venv"
+
+  - repo: local
+    hooks:
+      - id: pytest
+        name: pytest
+        entry: uv run pytest -v
+        language: python
+        pass_filenames: false
+        always_run: true
