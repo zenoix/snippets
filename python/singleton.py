@@ -6,6 +6,7 @@ from typing import Any, Generic, TypeVar, override
 T = TypeVar("T")
 
 
+# Using metaclasses
 class SingletonMeta(type, Generic[T]):
     _instances: dict[SingletonMeta[T], T] = {}  # noqa: RUF012
 
@@ -17,3 +18,17 @@ class SingletonMeta(type, Generic[T]):
             if cls not in cls._instances:
                 cls._instances[cls] = super().__call__(*args, **kwargs)
         return cls._instances[cls]
+
+
+# Using an initializer function
+class _Singleton:
+    _instance: _Singleton | None = None
+
+    def __init__(self) -> None:
+        raise NotImplementedError
+
+
+def get_singleton(*args: Any, **kwargs: Any) -> _Singleton:
+    if _Singleton._instance is None:
+        _Singleton._instance = _Singleton(*args, **kwargs)
+    return _Singleton._instance
