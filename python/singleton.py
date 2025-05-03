@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from threading import Lock
-from typing import Any, Generic, TypeVar
+from typing import Any, Generic, TypeVar, override
 
 T = TypeVar("T")
 
@@ -11,7 +11,8 @@ class Singleton(type, Generic[T]):
 
     _lock: Lock = Lock()
 
-    def __call__(cls, *args: Any, **kwargs: Any) -> T:  # noqa: ANN401
+    @override
+    def __call__(cls, *args: Any, **kwargs: Any) -> T:
         with cls._lock:
             if cls not in cls._instances:
                 cls._instances[cls] = super().__call__(*args, **kwargs)
