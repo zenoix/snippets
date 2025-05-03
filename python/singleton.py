@@ -6,8 +6,8 @@ from typing import Any, Generic, TypeVar, override
 T = TypeVar("T")
 
 
-class Singleton(type, Generic[T]):
-    _instances: dict[Singleton[T], T] = {}  # noqa: RUF012
+class SingletonMeta(type, Generic[T]):
+    _instances: dict[SingletonMeta[T], T] = {}  # noqa: RUF012
 
     _lock: Lock = Lock()
 
