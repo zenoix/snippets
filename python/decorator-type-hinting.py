@@ -1,9 +1,5 @@
 from collections.abc import Callable
 from functools import wraps
-from typing import ParamSpec, TypeVar
-
-P = ParamSpec("P")
-R = TypeVar("R")
 
 
 def decorator[**P, R](func: Callable[P, R]) -> Callable[P, R]:

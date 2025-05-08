@@ -1,13 +1,11 @@
 from __future__ import annotations
 
 from threading import Lock
-from typing import Any, Generic, TypeVar, override
-
-T = TypeVar("T")
+from typing import Any, override
 
 
 # Using metaclasses
-class SingletonMeta(type, Generic[T]):
+class SingletonMeta[T](type):
     _instances: dict[SingletonMeta[T], T] = {}  # noqa: RUF012
 
     _lock: Lock = Lock()
