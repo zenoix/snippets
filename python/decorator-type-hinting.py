@@ -6,7 +6,7 @@ P = ParamSpec("P")
 R = TypeVar("R")
 
 
-def decorator(func: Callable[P, R]) -> Callable[P, R]:
+def decorator[**P, R](func: Callable[P, R]) -> Callable[P, R]:
     @wraps(func)
     def wrapper(*args: P.args, **kwargs: P.kwargs) -> R:
         return func(*args, **kwargs)
