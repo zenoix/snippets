@@ -136,7 +136,7 @@ class ListSetting[T](MutableSequence[T]):
 
     def __get__(
         self, obj: object, objtype: type | None = None
-    ) -> MutableSequence[str | T]:
+    ) -> MutableSequence[str | T] | MutableSequence[str]:
         """Evaluate the environment variable and parse it into a list when accessed.
 
         Returns:
@@ -145,7 +145,7 @@ class ListSetting[T](MutableSequence[T]):
         return self.value
 
     @cached_property
-    def value(self) -> MutableSequence[str | T]:
+    def value(self) -> MutableSequence[str | T] | MutableSequence[str]:
         """Evaluate the environment variable and parse it into a list when accessed.
 
         Returns:
